@@ -1,0 +1,21 @@
+.main_btn{
+    padding: .5em .5em;
+    font-size: 1em;
+    font-weight:500;
+    color: #16479d;
+    background-color:  transparent;
+    border: 1px solid #16479d;
+    border-radius: 5px;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.main_btn:hover{
+    padding: .5em .5em;
+    font-size: 1em;
+    font-weight:500;
+    color: black;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
