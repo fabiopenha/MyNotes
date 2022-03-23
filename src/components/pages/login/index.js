@@ -24,7 +24,7 @@ const Login = () => {
                     />
                     <div className={styles.btn_container}>
                         <span><Link to='/login'>Create an account or</Link></span>
-                        <Link to='/dashboard'><Button text='Login' /></Link>
+                        <Link to='/notes'><Button text='Login' /></Link>
                     </div>
                 </form>
             </div>

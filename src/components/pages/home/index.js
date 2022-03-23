@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
-import presentation from '../../../presentation.png'
+import presentation from '../../../presentation.png';
 const Home = () => {
     return (
         <div className={styles.home_container}>
@@ -18,7 +19,7 @@ const Home = () => {
                     </p>
 
                     <div>
-                        <button>Register for free now</button>
+                        <Link to='/register'><button>Register for free now</button></Link>
                     </div>
                 </div>
                 

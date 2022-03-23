@@ -30,7 +30,7 @@ const Register = () => {
                     />
                     <div className={styles.btn_container}>
                         <span><Link to='/login'>Login or</Link></span>
-                        <Link to='/dashboard'><Button text='Register'/></Link>
+                        <Link to='/notes'><Button text='Register'/></Link>
                     </div>
                 </form>
             </div>

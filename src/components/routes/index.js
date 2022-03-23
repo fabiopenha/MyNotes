@@ -4,6 +4,7 @@ import Home from '../pages/home';
 import Container from '../container';
 import Register from "../pages/register";
 import Login from '../pages/login';
+import Notes from '../pages/notes';
 
 const RouterBrowser = () => {
     return (
@@ -17,6 +18,9 @@ const RouterBrowser = () => {
                 <Route path='/login' element={<Login />} />
             </Routes>
         </Container>
+        <Routes>
+            <Route path='/notes' element={<Notes />} />
+        </Routes>
   </BrowserRouter>
     )
 }

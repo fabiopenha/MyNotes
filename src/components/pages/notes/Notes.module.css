@@ -1,0 +1,93 @@
+.notes_container {
+    top: 75px;
+    position: absolute;
+    width: 100%;
+    height: 87.4vh;
+    background-color: beige;
+    display: flex;
+}
+
+.notes_container .notes_aside {
+    width: 20%;
+    height: 100%;
+    background-color: blanchedalmond;
+    border: 1px solid #cecece;
+}
+
+.notes_container .main_content {
+    width: 100%;
+    height: 20%;
+    background-color: #EEEEEE;
+    color: #8a8888;
+    border: 1px solid #cecece;
+    border-right: none;
+}
+
+.notes_container .box_note {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.notes_container input {
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+.notes_container .time {
+    padding-left: .5em;
+    padding-bottom: .5em;
+    font-size: .9em;
+}
+
+.notes_container .allcards {
+    overflow-y: scroll;
+    height: 80%;
+}
+
+.notes_container .content_dynamic {
+    width: 100%;
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: .5em;
+    padding-bottom: .4em;
+    border-bottom: 1px solid rgb(180, 180, 180);
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.notes_container .content_dynamic:hover {
+    background-color: #d4d1d1;
+}
+
+.notes_container .title {
+    font-size: 1em;
+    font-weight: 500;
+    color:#504f4f ;
+    padding-top: .4em;
+    padding-bottom: .3em;
+}
+
+.notes_container .bodytext {
+    width: 100%;
+    font-size: .8em;
+    padding-bottom: .4em;
+}
+
+.notes_container span {
+    width: 3em;
+    font-size: .8em;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(70, 67, 67);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notes_container ul {
+    list-style: none;
+}
