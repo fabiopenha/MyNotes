@@ -12,6 +12,8 @@
     height: 100%;
     background-color: blanchedalmond;
     border: 1px solid #cecece;
+    transition: ease all .5s;
+    
 }
 
 .notes_container .main_content {
@@ -88,6 +90,8 @@
     justify-content: center;
 }
 
-.notes_container ul {
-    list-style: none;
+.notes_container .textbox_container {
+    width: 100%;
+    padding-top: 1em;
+    background-color: white;
 }

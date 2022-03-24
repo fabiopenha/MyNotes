@@ -1,8 +1,11 @@
+import { Editor } from '@tinymce/tinymce-react';
 import styles from '../notes/Notes.module.css';
-import Input from '../../../components/forms/Input'
+import Input from '../../../components/forms/Input';
+
+
 const Notes = () => {
     return (
-        <aside className={styles.notes_container}>
+        <div className={styles.notes_container}>
             <div className={styles.notes_aside}>
                 <div className={styles.main_content}>
                     <div className={styles.box_note}><Input/></div>
@@ -69,13 +72,26 @@ const Notes = () => {
 
             </div>
                     
-            
-            
-            
-            <div>
-                text
+            <div className={styles.textbox_container}>
+            <Editor
+                initialValue="<p>Digite a sua anotação...</p>"
+                init={{
+                height: 525,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image', 
+                    'charmap print preview anchor help',
+                    'searchreplace visualblocks code',
+                    'insertdatetime media table paste wordcount'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic | \
+                    alignleft aligncenter alignright | \
+                    bullist numlist outdent indent | help'
+                }}
+            />
             </div>
-        </aside>
+        </div>
             
         
     )
