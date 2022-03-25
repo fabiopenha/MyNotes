@@ -5,6 +5,7 @@ import Container from '../container';
 import Register from "../pages/register";
 import Login from '../pages/login';
 import Notes from '../pages/notes';
+import PrivateRouter from "./PrivateRouter";
 
 const RouterBrowser = () => {
     return (
@@ -19,7 +20,7 @@ const RouterBrowser = () => {
             </Routes>
         </Container>
         <Routes>
-            <Route path='/notes' element={<Notes />} />
+            <Route path='/notes' element={<PrivateRouter><Notes /></PrivateRouter>} />
         </Routes>
   </BrowserRouter>
     )
