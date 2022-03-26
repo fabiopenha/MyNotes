@@ -7,7 +7,9 @@ import Login from '../pages/login';
 import Notes from '../pages/notes';
 import PrivateRouter from "./PrivateRouter";
 
+
 const RouterBrowser = () => {
+
     return (
     
     <BrowserRouter>
