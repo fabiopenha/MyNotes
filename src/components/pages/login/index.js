@@ -1,25 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Input from '../../forms/Input';
 import styles from '../register/Register.module.css';
 
 import Button from '../../../components/button';
-import { Link, useNavigate } from 'react-router-dom';
-import UserService from '../../../services/users';
+import { Link } from 'react-router-dom';
+import { Context } from '../../context/UserContext';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-    const navigate = useNavigate()
+    const [user, setUser] = useState();
+    const {login, error, textLogin} = useContext(Context);
+
+    const handleChange = (e) =>{
+        setUser({...user, [e.target.name]: e.target.value})
+    }
+
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-       
-        try {
-            await UserService.login({email: email, password: password});
-            navigate('/notes');
-        } catch (error) {
-            setError(true)
-          }
+        
+        login(user)
+
     }
     return (
         <div className={styles.register_container}>
@@ -31,17 +30,17 @@ const Login = () => {
                         text= 'E-mail' 
                         name='email' 
                         placeholder='Insert your email'
-                        onChange={e => setEmail(e.target.value)}
+                        handleOnChange={handleChange}
                     />
                     <Input 
                         type='password'
                         text= 'Password' 
                         name='password' 
                         placeholder='Insert your password'
-                        onChange={e => setPassword(e.target.value)}
+                        handleOnChange={handleChange}
                     />
                     { error && 
-                        <div className={styles.formError}>Email or password invalid</div>}
+                        <div className={styles.formError}>{textLogin}</div>}
                     <div className={styles.btn_container}>
                         <span><Link to='/login'>Create an account or</Link></span>
                         <Button type='submit' text='Login' />

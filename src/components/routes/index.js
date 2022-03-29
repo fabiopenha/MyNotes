@@ -6,24 +6,27 @@ import Register from "../pages/register";
 import Login from '../pages/login';
 import Notes from '../pages/notes';
 import PrivateRouter from "./PrivateRouter";
-
+import { UserProvider} from "../context/UserContext";
 
 const RouterBrowser = () => {
 
     return (
     
     <BrowserRouter>
-        <Navbar />
-        <Container>
+        <UserProvider>
+            <Navbar />
+            <Container>
+            
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/login' element={<Login />} />
+                </Routes>
+            </Container>
             <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/login' element={<Login />} />
+                <Route path='/notes' element={<PrivateRouter><Notes /></PrivateRouter>} />
             </Routes>
-        </Container>
-        <Routes>
-            <Route path='/notes' element={<PrivateRouter><Notes /></PrivateRouter>} />
-        </Routes>
+        </UserProvider>
   </BrowserRouter>
     )
 }
