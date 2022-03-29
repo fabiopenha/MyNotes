@@ -1,9 +1,25 @@
 import { Editor } from '@tinymce/tinymce-react';
 import styles from '../notes/Notes.module.css';
 import Input from '../../../components/forms/Input';
-
-
+import Card from '../notes/cards';
+import Api from '../../../services/api'
+import {useEffect, useState} from 'react'
+import Moment from 'moment';
 const Notes = () => {
+    const [notes, setNotes] = useState([])
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token')
+
+        Api.get('/notes', {
+            headers: {'token':`${JSON.parse(token)}`}
+        }).then(({data})=>{
+            setNotes(data)
+        })
+    },[])
+
+
+
     return (
         <div className={styles.notes_container}>
             <div className={styles.notes_aside}>
@@ -12,62 +28,18 @@ const Notes = () => {
                     <div className={styles.time}><p>10 Notes</p></div>
                 </div>
                 <div className={styles.allcards}>
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-                    <div className={styles.content_dynamic}>
-                        <p className={styles.title}>Lorem Ipsum</p>
-                        <div className={styles.bodytext}>
-                            <p>Lorem Ipsum is simply dummy text of the printing 
-                            and typesetting industry. 
-                            </p>
-                        </div>
-                        <span><p>17/04</p></span>
-                    </div>
-                    
+                
+                
+                    {notes?.map((item)=>(
+                        <Card 
+                            key={item._id}
+                            title={item.title}
+                            textBody={item.body} 
+                            time={Moment(item.created_at).format('DD/MM')}
+                        / >
+                    ))}
+                
+            
                 </div>
 
             </div>
