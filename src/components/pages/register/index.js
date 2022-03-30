@@ -4,7 +4,6 @@ import styles from '../register/Register.module.css';
 
 import Button from '../../button';
 import { Link } from 'react-router-dom';
-import UserService from '../../../services/users';
 import { Context } from '../../context/UserContext'
 
 const Register = () => {

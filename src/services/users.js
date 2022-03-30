@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 export default function UserService() {
     const [authenticated, setAuthenticated] = useState(false)
     const [error, setError] = useState(false)
-    const [userName, setuserName] = useState('')
     const [text, setText] = useState('')
     const [textLogin, setTextLogin] = useState('')
     const navigate = useNavigate()
@@ -26,13 +25,12 @@ export default function UserService() {
             return response.data
           })
     
-          await authUser(data)
         } catch (error) {
           // tratar erro
           setError(true)
           setText(error.response.data.error)
         }
-    
+        navigate('/login')
       }
 
       async function login(user) {
@@ -54,10 +52,10 @@ export default function UserService() {
     }
 
       async function authUser(data) {
+        console.log(data.token, data.user)
         setAuthenticated(true)
         localStorage.setItem('token', JSON.stringify(data.token))
         localStorage.setItem('user', JSON.stringify(data.user))
-        setuserName(data.user.name)
     
         navigate('/')
       }
@@ -72,5 +70,5 @@ export default function UserService() {
 
     }
 
-    return  {userName, error, text,textLogin, authenticated, register, logout, login }
+    return  {error, text,textLogin, authenticated, register, logout, login }
 }

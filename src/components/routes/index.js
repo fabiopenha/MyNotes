@@ -7,6 +7,7 @@ import Login from '../pages/login';
 import Notes from '../pages/notes';
 import PrivateRouter from "./PrivateRouter";
 import { UserProvider} from "../context/UserContext";
+import { NotesProvider } from "../context/NoteContext";
 
 const RouterBrowser = () => {
 
@@ -23,9 +24,14 @@ const RouterBrowser = () => {
                     <Route path='/login' element={<Login />} />
                 </Routes>
             </Container>
-            <Routes>
-                <Route path='/notes' element={<PrivateRouter><Notes /></PrivateRouter>} />
-            </Routes>
+            
+            <NotesProvider>
+                <Routes>
+                        <Route path='/notes' element={
+                            <PrivateRouter><Notes /></PrivateRouter>
+                        } />           
+                </Routes>
+            </NotesProvider>
         </UserProvider>
   </BrowserRouter>
     )

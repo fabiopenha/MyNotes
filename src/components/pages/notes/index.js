@@ -3,20 +3,28 @@ import styles from '../notes/Notes.module.css';
 import Input from '../../../components/forms/Input';
 import Card from '../notes/cards';
 import Api from '../../../services/api'
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import Moment from 'moment';
+import { Context } from '../../context/NoteContext';
+
 const Notes = () => {
     const [notes, setNotes] = useState([])
+    const [body, setBody] = useState('')
+    const {create} = useContext(Context);
 
     useEffect(()=>{
-        const token = localStorage.getItem('token')
 
-        Api.get('/notes', {
-            headers: {'token':`${JSON.parse(token)}`}
-        }).then(({data})=>{
-            setNotes(data)
-        })
-    },[])
+        const token = localStorage.getItem('token')
+        
+            Api.get('/notes', {
+                headers: {'token':`${JSON.parse(token)}`}
+            }).then(({data})=>{
+                
+            setNotes(data.reverse())
+                
+                
+            })
+    },[notes])
 
 
 
@@ -25,7 +33,12 @@ const Notes = () => {
             <div className={styles.notes_aside}>
                 <div className={styles.main_content}>
                     <div className={styles.box_note}><Input/></div>
-                    <div className={styles.time}><p>10 Notes</p></div>
+                    <div className={styles.time}>
+                        <p>{notes.length > 1?
+                            `${notes.length} Notes`:`${notes.length} Note`}
+                        </p>
+                        <a onClick={() => create()} className={styles.createNotes}>Note +</a>
+                    </div>
                 </div>
                 <div className={styles.allcards}>
                 
@@ -36,6 +49,8 @@ const Notes = () => {
                             title={item.title}
                             textBody={item.body} 
                             time={Moment(item.created_at).format('DD/MM')}
+                            notes={notes}
+                            noteId={item._id}
                         / >
                     ))}
                 
@@ -46,7 +61,9 @@ const Notes = () => {
                     
             <div className={styles.textbox_container}>
             <Editor
-                initialValue="<p>Digite a sua anotação...</p>"
+                textareaName='content'
+                initialValue='Write your content here'
+                onEditorChange={(newText) => {setBody(newText)}}
                 init={{
                 height: 525,
                 menubar: false,

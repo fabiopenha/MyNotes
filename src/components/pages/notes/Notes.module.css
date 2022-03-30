@@ -34,13 +34,33 @@
 .notes_container input {
     margin: 0 auto;
     width: 80%;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
 }
 
 .notes_container .time {
+    width: 100%;
     padding-left: .5em;
-    padding-bottom: .5em;
+    padding-bottom: 1em;
     font-size: .9em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes_container .createNotes{
+    border: 2px solid green;
+    color: green;
+    padding: .1em;
+    font-weight: 500;
+    margin-right: 1.1em;
+    cursor: pointer;
+
+}
+
+.notes_container .createNotes:hover{
+    color: white;
+    background-color: green;
+    transition: ease 1s;
 }
 
 .notes_container .allcards {
@@ -59,10 +79,12 @@
     border-bottom: 1px solid rgb(180, 180, 180);
     flex-wrap: wrap;
     cursor: pointer;
+    transition: ease 1s;
 }
 
 .notes_container .content_dynamic:hover {
     background-color: #d4d1d1;
+    transition: ease 1s;
 }
 
 .notes_container .title {
@@ -94,4 +116,19 @@
     width: 100%;
     padding-top: 1em;
     background-color: white;
+}
+
+.notes_container .time_content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.notes_container .icon{
+    margin-right: .2em;
+}
+
+.notes_container .icon:hover{
+    color: red;
+    margin-right: .2em;
+    transition: ease .5s;
 }
