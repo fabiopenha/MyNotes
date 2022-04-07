@@ -10,9 +10,9 @@ export default function UserService() {
     const navigate = useNavigate()
 
     useEffect(()=> {
-        const token = localStorage.getItem('token')
-        const user = localStorage.getItem('user')
-        
+        const token = localStorage.getItem("token")
+        const user = localStorage.getItem("user")
+        console.log(token, user)
         if (token && user) {
             setAuthenticated(true)
         }
@@ -24,13 +24,15 @@ export default function UserService() {
           const data = await Api.post('users/register', user).then((response) => {
             return response.data
           })
-    
+          
+          navigate('/login')
+  
         } catch (error) {
           // tratar erro
           setError(true)
           setText(error.response.data.error)
         }
-        navigate('/login')
+
       }
 
       async function login(user) {
@@ -52,7 +54,6 @@ export default function UserService() {
     }
 
       async function authUser(data) {
-        console.log(data.token, data.user)
         setAuthenticated(true)
         localStorage.setItem('token', JSON.stringify(data.token))
         localStorage.setItem('user', JSON.stringify(data.user))

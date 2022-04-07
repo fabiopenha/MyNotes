@@ -1,14 +1,11 @@
 import styles from '../notes/Notes.module.css';
-
+import NotesService from '../../../services/notes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { useState, useContext } from 'react';
-import { Context } from '../../context/NoteContext';
 
  const Card = (props) => {
     
-    const {deleteNote} = useContext(Context);
-    const [notes, setNotes] = useState(props.notes)
     
     return (
         <div className={styles.content_dynamic}>
@@ -18,7 +15,7 @@ import { Context } from '../../context/NoteContext';
                         </div>
                         <div className={styles.time_content}>
                             <span><p>{props.time}</p></span>
-                            <a onClick={ () => deleteNote(props.noteId)}>
+                            <a onClick={ () => NotesService.delete(props.noteId, props.token)}>
                                 <FontAwesomeIcon 
                                     className={styles.icon} 
                                     icon={faTrashAlt} 

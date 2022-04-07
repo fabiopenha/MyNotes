@@ -1,27 +1,21 @@
 import Api from "./api";
-
-export default function NotesService() {    
-    const token = localStorage.getItem('token')
-    async function create() {
-        try{
-            const data = await Api.post('/notes',{'title':'nova nota', 'body':'nova nota'}, {
-                headers: {'token': JSON.parse(token)}
-            })
-        } catch(error) {
-            let err = error.response.data.error
-        }
-    }
-
-    async function deleteNote(id) {
-        try{
-            const data = await Api.delete(`/notes/${id}`, {
-                headers: {'token': JSON.parse(token)}
-            })
-        } catch(error) {
-            let err = error.response.data.error
-        }
-    }
-    
-
-    return {create, deleteNote}
-}
+console.log(`TOKEN: ${window.localStorage.getItem("token")}`)
+const NotesService = {
+    index: (token) => Api.get('/notes', {
+      headers: {'token': JSON.parse(token) }
+    }),
+    create: (token) => Api.post('/notes', {'title': 'Nova nota', 'body': 'Nova nota...' }, {
+      headers: {'token': JSON.parse(token) }
+    }),
+    delete: (id, token) => Api.delete(`/notes/${id}`, {
+      headers: {'token': JSON.parse(token) }
+    }),
+    update: (id, params) => Api.put(`/notes/${id}`, params, {
+      headers: {'token': localStorage.getItem('token') }
+    }),
+    search: (query) => Api.get(`/notes/search?query=${query}`, {
+      headers: {'token': localStorage.getItem('token') }
+    })
+  }
+  
+  export default NotesService;

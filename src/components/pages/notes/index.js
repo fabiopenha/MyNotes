@@ -2,31 +2,32 @@ import { Editor } from '@tinymce/tinymce-react';
 import styles from '../notes/Notes.module.css';
 import Input from '../../../components/forms/Input';
 import Card from '../notes/cards';
-import Api from '../../../services/api'
+import NotesService from '../../../services/notes';
 import {useContext, useEffect, useState} from 'react'
 import Moment from 'moment';
-import { Context } from '../../context/NoteContext';
 
 const Notes = () => {
     const [notes, setNotes] = useState([])
     const [body, setBody] = useState('')
-    const {create} = useContext(Context);
+    const [token, setToken] = useState(window.localStorage.getItem("token"))
 
-    useEffect(()=>{
+    useEffect(() => {
+        fetchNotes()
+    })
 
-        const token = localStorage.getItem('token')
-        
-            Api.get('/notes', {
-                headers: {'token':`${JSON.parse(token)}`}
-            }).then(({data})=>{
-                
-            setNotes(data.reverse())
-                
-                
-            })
-    },[notes])
-
-
+    async function fetchNotes() {
+        const response = await NotesService.index(token);
+        if (response.data.length >= 1) {
+            setNotes(response.data.reverse())
+        } else {
+            setNotes([]);
+        }
+    }
+    
+    const createNote = async () => {
+        await NotesService.create(token);
+        fetchNotes();
+    }
 
     return (
         <div className={styles.notes_container}>
@@ -37,7 +38,7 @@ const Notes = () => {
                         <p>{notes.length > 1?
                             `${notes.length} Notes`:`${notes.length} Note`}
                         </p>
-                        <a onClick={() => create()} className={styles.createNotes}>Note +</a>
+                        <a onClick={() => createNote()} className={styles.createNotes}>Note +</a>
                     </div>
                 </div>
                 <div className={styles.allcards}>
@@ -49,7 +50,7 @@ const Notes = () => {
                             title={item.title}
                             textBody={item.body} 
                             time={Moment(item.created_at).format('DD/MM')}
-                            notes={notes}
+                            token={token}
                             noteId={item._id}
                         / >
                     ))}

@@ -1,9 +1,11 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import UserService from "../../services/users";
 
 const Context = createContext()
 
 function UserProvider({children}) {
+    const [token, setToken] = useState(window.localStorage.getItem("token"))
+    
     const {
         register, 
         login, 
@@ -18,7 +20,8 @@ function UserProvider({children}) {
          logout, 
          error, 
          text,textLogin, 
-         authenticated
+         authenticated,
+         token
          }}>{children}</Context.Provider>
 
 }
