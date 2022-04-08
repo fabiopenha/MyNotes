@@ -84,7 +84,10 @@
 
 .notes_container .content_dynamic:hover {
     background-color: #d4d1d1;
-    transition: ease 1s;
+}
+
+.notes_container .active {
+    background-color: #d4d1d1;
 }
 
 .notes_container .title {
